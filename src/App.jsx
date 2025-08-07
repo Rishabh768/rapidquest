@@ -5,12 +5,14 @@ import SideBarChat from "./components/SideBarChat";
 import MainChatArea from "./components/MainChatArea";
 
 const App = () => {
+  const END_POINT = import.meta.env.VITE_END_POINT;
+
   const [selectedChat, setSelectedChat] = useState(null);
   const [isChatListVisible, setIsChatListVisible] = useState(true);
   const [chats, setChats] = useState([]);
 
   const getChats = async () => {
-    const res = await axios.get("http://localhost:5000/chats");
+    const res = await axios.get(`${END_POINT}/chats`);
     setChats(res.data);
   };
 
@@ -77,7 +79,7 @@ const App = () => {
       input.value = "";
 
       // Send to backend
-      await axios.post("http://localhost:5000/webhook", test);
+      await axios.post(`${END_POINT}/webhook`, test);
 
       // Get the message from test
       const sentMessage = test.metaData.entry[0].changes[0].value.messages[0];
@@ -91,7 +93,7 @@ const App = () => {
 
 
   const handleSelectChat = async (chat) => {
-    const res = await axios.get(`http://localhost:5000/messages/${chat._id}`);
+    const res = await axios.get(`${END_POINT}/messages/${chat._id}`);
     setSelectedChat(res.data);
     if (window.innerWidth < 768) {
       setIsChatListVisible(false);
