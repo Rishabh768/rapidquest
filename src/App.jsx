@@ -105,6 +105,12 @@ const App = () => {
     setSelectedChat(null);
   };
 
+   if(chats.length === 0){
+    return <div className="w-full h-screen flex justify-center items-center ">
+           Loading...
+           </div>
+   }
+
   return (
     <div className="flex h-screen antialiase</div>d text-gray-800 font-inter">
       <div className="flex flex-row h-full w-full overflow-hidden bg-gray-100 rounded-lg shadow-lg">
